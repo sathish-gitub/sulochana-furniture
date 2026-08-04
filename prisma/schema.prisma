@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+enum MenuLocation {
+  MAIN
+  TOP
+  FOOTER
+}
+
+model MenuItem {
+  id         String        @id @default(cuid())
+  location   MenuLocation
+  label      String
+  url        String?
+  categoryId String?
+  category   Category?     @relation(fields: [categoryId], references: [id])
+  parentId   String?
+  parent     MenuItem?     @relation("MenuItemHierarchy", fields: [parentId], references: [id])
+  children   MenuItem[]    @relation("MenuItemHierarchy")
+  order      Int           @default(0)
+  createdAt  DateTime      @default(now())
+}
+
+model Category {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  image       String?
+  description String?
+  parentId    String?
+  parent      Category?   @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    Category[]  @relation("CategoryHierarchy")
+  order       Int         @default(0)
+  createdAt   DateTime    @default(now())
+  products    Product[]
+  menuItems   MenuItem[]
+}
+
+enum ProductStatus {
+  ACTIVE
+  DRAFT
+  OUT_OF_STOCK
+}
+
+model Product {
+  id           String               @id @default(cuid())
+  name         String
+  slug         String               @unique
+  sku          String?
+  description  String?
+  brand        String?
+  tags         String?
+  status       ProductStatus        @default(ACTIVE)
+  categoryId   String
+  category     Category             @relation(fields: [categoryId], references: [id])
+  images       ProductImage[]
+  attributes   ProductAttribute[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  order     Int     @default(0)
+}
+
+model ProductAttribute {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label     String
+  value     String
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  image     String
+  title     String?
+  subtitle  String?
+  ctaLabel  String?
+  ctaUrl    String?
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  quote     String
+  rating    Int      @default(5)
+  photo     String?
+  featured  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Award {
+  id    String @id @default(cuid())
+  title String
+  image String
+  order Int    @default(0)
+}
+
+model SiteSetting {
+  id            String  @id @default("singleton")
+  contactEmail  String
+  contactPhone  String
+  whatsappNumber String
+  address       String?
+  mapEmbedUrl   String?
+  storyTitle    String?
+  storyContent  String?
+  storyImage    String?
+  aboutBanner   String?
+}
