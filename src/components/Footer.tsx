@@ -13,6 +13,14 @@ export default async function Footer() {
     { label: 'Instagram', href: 'https://www.instagram.com/sulochana_furniture/', icon: InstagramIcon },
     { label: 'YouTube', href: '#', icon: YoutubeIcon },
   ];
+  const defaultQuickLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'About Us', href: '/about' },
+    { label: 'Categories', href: '/category/sofas' },
+    { label: 'Career', href: '/career' },
+    { label: 'Contact Us', href: '/contact' },
+  ];
+  const quickLinks = footerItems.length > 0 ? footerItems.map((item) => ({ label: item.label, href: item.url ?? '/' })) : defaultQuickLinks;
   const contactPhone = settings?.contactPhone?.trim() || '+91 75503 50009';
   const contactEmail = settings?.contactEmail?.trim() || 'hello@sulochanafurniture.com';
   const address = settings?.address?.trim() || '1A2, Udumalai Road, Chinnampalayam, Pollachi';
@@ -38,16 +46,13 @@ export default async function Footer() {
         <div>
           <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-stone-400">Quick Links</h3>
           <ul className="space-y-2 text-sm text-stone-300">
-            {footerItems.map((item) => {
-              const href = item.url ?? '/';
-              return (
-                <li key={item.id}>
-                  <Link href={href} className="transition hover:text-white">
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
+            {quickLinks.map((item) => (
+              <li key={item.label}>
+                <Link href={item.href} className="transition hover:text-white">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 

@@ -32,25 +32,35 @@ export default function HomeBannerSlider({ banners }: HomeBannerSliderProps) {
 
   const goToSlide = (index: number) => setActiveIndex(index);
 
+  const bannerDimensions = {
+    '/images/slider/slider_1.jpg': { width: 2172, height: 724 },
+    '/images/slider/slider_2.jpg': { width: 1350, height: 450 },
+    '/images/slider/slider_3.jpg': { width: 1350, height: 450 },
+    '/images/slider/slider_4.jpg': { width: 1350, height: 450 },
+  } as const;
+
   return (
     <section className="relative isolate mt-6 px-4 md:px-6">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[32px]">
         <div className="relative overflow-hidden rounded-[32px]">
           <div className="flex w-full transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-            {banners.map((banner, index) => (
-              <div key={banner.id} className="relative min-w-full">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[32px] bg-transparent md:aspect-[1350/450]">
+            {banners.map((banner, index) => {
+              const dims = bannerDimensions[banner.image as keyof typeof bannerDimensions] ?? { width: 1350, height: 450 };
+
+              return (
+                <div key={banner.id} className="relative min-w-full">
                   <Image
                     src={banner.image}
                     alt={banner.title ?? `Featured banner ${index + 1}`}
-                    fill
-                    className="h-full w-full object-cover"
+                    width={dims.width}
+                    height={dims.height}
+                    className="h-auto w-full"
                     unoptimized
                     priority={index === 0}
                   />
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

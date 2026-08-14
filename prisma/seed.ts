@@ -370,11 +370,33 @@ async function ensureBanners(prismaClient: PrismaClient | Prisma.TransactionClie
   });
 }
 
+async function ensureFooterLinks(prismaClient: PrismaClient | Prisma.TransactionClient) {
+  const footerLinks = [
+    { location: 'FOOTER', label: 'Home', url: '/', order: 1 },
+    { location: 'FOOTER', label: 'About Us', url: '/about', order: 2 },
+    { location: 'FOOTER', label: 'Categories', url: '/category/sofas', order: 3 },
+    { location: 'FOOTER', label: 'Career', url: '/career', order: 4 },
+    { location: 'FOOTER', label: 'Contact Us', url: '/contact', order: 5 },
+  ] as const;
+
+  await prismaClient.menuItem.deleteMany({ where: { location: 'FOOTER' } });
+
+  return prismaClient.menuItem.createMany({
+    data: footerLinks.map((item) => ({
+      location: item.location,
+      label: item.label,
+      url: item.url,
+      order: item.order,
+    })),
+  });
+}
+
 export async function seedDatabase(prismaClient: PrismaClient) {
   const categoryRecords = buildCategoryRecords();
 
   await ensureSiteSettings(prismaClient);
   await ensureBanners(prismaClient);
+  await ensureFooterLinks(prismaClient);
 
   await prismaClient.productAttribute.deleteMany();
   await prismaClient.productImage.deleteMany();
