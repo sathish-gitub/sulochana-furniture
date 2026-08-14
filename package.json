@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "prisma generate",
     "seed": "tsx prisma/seed.ts",
     "fix-images": "tsx prisma/add-placeholder-images.ts",
     "db:reset": "tsx prisma/reset-and-reseed.ts"
