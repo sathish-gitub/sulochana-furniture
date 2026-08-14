@@ -13,6 +13,10 @@ export default async function Footer() {
     { label: 'Instagram', href: 'https://www.instagram.com/sulochana_furniture/', icon: InstagramIcon },
     { label: 'YouTube', href: '#', icon: YoutubeIcon },
   ];
+  const contactPhone = settings?.contactPhone?.trim() || '+91 75503 50009';
+  const contactEmail = settings?.contactEmail?.trim() || 'hello@sulochanafurniture.com';
+  const address = settings?.address?.trim() || '1A2, Udumalai Road, Chinnampalayam, Pollachi';
+  const mapUrl = settings?.mapEmbedUrl?.trim() || 'https://www.google.com/maps?q=1A2%2C%20Udumalai%20Road%2C%20Chinnampalayam%2C%20Pollachi&output=embed';
 
   return (
     <footer className="border-t border-stone-200 bg-stone-900 text-stone-200">
@@ -50,21 +54,17 @@ export default async function Footer() {
         <div>
           <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-stone-400">Contact</h3>
           <div className="space-y-3 text-sm leading-7 text-stone-300">
-            {settings?.contactPhone ? <p>{settings.contactPhone}</p> : null}
-            {settings?.contactEmail ? <p>{settings.contactEmail}</p> : null}
-            {settings?.address ? <p>{settings.address}</p> : null}
+            <p>{contactPhone}</p>
+            <p>{contactEmail}</p>
+            <p>{address}</p>
           </div>
         </div>
 
         <div>
           <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-stone-400">Find Us</h3>
-          {settings?.mapEmbedUrl ? (
-            <div className="overflow-hidden rounded-2xl border border-stone-800">
-              <iframe src={settings.mapEmbedUrl} className="h-48 w-full" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-            </div>
-          ) : (
-            <p className="text-sm text-stone-400">Map details will appear here once configured.</p>
-          )}
+          <div className="overflow-hidden rounded-2xl border border-stone-800">
+            <iframe src={mapUrl} className="h-48 w-full" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+          </div>
         </div>
       </div>
 

@@ -14,8 +14,11 @@ export const metadata: Metadata = {
 
 export default async function ContactPage() {
   const settings = await safePrismaQuery(() => prisma.siteSetting.findUnique({ where: { id: 'singleton' } }), null);
-  const mapUrl = settings?.mapEmbedUrl?.trim() ?? '';
-  const isEmbeddableMapUrl = Boolean(mapUrl) && /(google\.com\/maps\/embed|maps\.google\.com\/maps\?|openstreetmap\.org\/export\/embed)/i.test(mapUrl);
+  const address = settings?.address?.trim() || '1A2, Udumalai Road, Chinnampalayam, Pollachi';
+  const contactPhone = settings?.contactPhone?.trim() || '+91 75503 50009';
+  const contactEmail = settings?.contactEmail?.trim() || 'hello@sulochanafurniture.com';
+  const mapUrl = settings?.mapEmbedUrl?.trim() || 'https://www.google.com/maps?q=1A2%2C%20Udumalai%20Road%2C%20Chinnampalayam%2C%20Pollachi&output=embed';
+  const isEmbeddableMapUrl = /(google\.com\/maps\/embed|maps\.google\.com\/maps\?|openstreetmap\.org\/export\/embed)/i.test(mapUrl);
 
   return (
     <div className="bg-white pb-16">
@@ -70,15 +73,15 @@ export default async function ContactPage() {
             <div className="mt-6 space-y-5 text-sm text-stone-700">
               <div>
                 <p className="font-semibold uppercase tracking-[0.2em] text-brand">Address</p>
-                <p className="mt-2 leading-7">{settings?.address ?? 'Address will be updated soon.'}</p>
+                <p className="mt-2 leading-7">{address}</p>
               </div>
               <div>
                 <p className="font-semibold uppercase tracking-[0.2em] text-brand">Phone</p>
-                <p className="mt-2">{settings?.contactPhone ?? 'Phone will be updated soon.'}</p>
+                <p className="mt-2">{contactPhone}</p>
               </div>
               <div>
                 <p className="font-semibold uppercase tracking-[0.2em] text-brand">Email</p>
-                <p className="mt-2">{settings?.contactEmail ?? 'Email will be updated soon.'}</p>
+                <p className="mt-2">{contactEmail}</p>
               </div>
               <div>
                 <p className="font-semibold uppercase tracking-[0.2em] text-brand">Store Hours</p>

@@ -323,20 +323,32 @@ async function ensureCategory(prismaClient: PrismaClient | Prisma.TransactionCli
 async function ensureSiteSettings(prismaClient: PrismaClient | Prisma.TransactionClient) {
   const storyTitle = 'A Tradition of Quality. A Legacy of Trust.';
   const storyContent = 'For over 40 years, Sulochana Furniture has been part of countless homes, built on quality, honesty and trust. With our own manufacturing factory and carefully sourced teak and mahogany wood, we craft furniture designed to last for generations.';
+  const address = '1A2, Udumalai Road, Chinnampalayam, Pollachi';
+  const contactPhone = '+91 75503 50009';
+  const contactEmail = 'hello@sulochanafurniture.com';
+  const whatsappNumber = '917550350009';
+  const mapEmbedUrl = 'https://www.google.com/maps?q=1A2%2C%20Udumalai%20Road%2C%20Chinnampalayam%2C%20Pollachi&output=embed';
 
   return prismaClient.siteSetting.upsert({
     where: { id: 'singleton' },
     create: {
       id: 'singleton',
-      contactEmail: '',
-      contactPhone: '',
-      whatsappNumber: '',
+      address,
+      contactEmail,
+      contactPhone,
+      mapEmbedUrl,
+      whatsappNumber,
       storyTitle,
       storyContent,
       storyImage: null,
       aboutBanner: null,
     },
     update: {
+      address,
+      contactEmail,
+      contactPhone,
+      mapEmbedUrl,
+      whatsappNumber,
       storyTitle,
       storyContent,
     },

@@ -31,6 +31,9 @@ export default async function Header() {
     { id: 'career', label: 'Career', href: '/career' },
     { id: 'contact', label: 'Contact Us', href: '/contact' },
   ];
+  const address = settings?.address?.trim() || '1A2, Udumalai Road, Chinnampalayam, Pollachi';
+  const contactPhone = settings?.contactPhone?.trim() || '+91 75503 50009';
+  const contactEmail = settings?.contactEmail?.trim() || 'hello@sulochanafurniture.com';
 
   return (
     <header className="sticky top-0 z-[60] border-b border-stone-200/70 bg-white/95 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur">
@@ -38,9 +41,9 @@ export default async function Header() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-sm text-white lg:px-8">
           <p className="text-white/90">Crafted interiors, thoughtful details, and timeless comfort.</p>
           <div className="flex flex-wrap items-center gap-5">
-            {settings?.address ? <span>{settings.address}</span> : null}
-            {settings?.contactPhone ? <a href={`tel:${settings.contactPhone}`} className="transition hover:text-[#f7efe8]">{settings.contactPhone}</a> : null}
-            {settings?.contactEmail ? <a href={`mailto:${settings.contactEmail}`} className="transition hover:text-[#f7efe8]">{settings.contactEmail}</a> : null}
+            <span>{address}</span>
+            <a href={`tel:${contactPhone}`} className="transition hover:text-[#f7efe8]">{contactPhone}</a>
+            <a href={`mailto:${contactEmail}`} className="transition hover:text-[#f7efe8]">{contactEmail}</a>
           </div>
         </div>
       </div>
