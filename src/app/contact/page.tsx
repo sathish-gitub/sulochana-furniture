@@ -18,12 +18,12 @@ export default async function ContactPage() {
   const isEmbeddableMapUrl = Boolean(mapUrl) && /(google\.com\/maps\/embed|maps\.google\.com\/maps\?|openstreetmap\.org\/export\/embed)/i.test(mapUrl);
 
   return (
-    <div className="bg-cream pb-16">
+    <div className="bg-white pb-16">
       <PageHero title="Contact Us" currentLabel="Contact Us" imageUrl={settings?.aboutBanner} eyebrow="Contact" />
 
       <FadeInSection className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <section className="rounded-[1.75rem] border border-stone-200 bg-[#fcf8f2] p-6 shadow-sm lg:p-8">
+          <section className="rounded-[1.75rem] border border-stone-200 bg-white p-6 shadow-sm lg:p-8">
             <SectionHeading
               eyebrow="Get In Touch"
               title="Do You Have Any Questions?"
@@ -128,7 +128,7 @@ export default async function ContactPage() {
             />
           </div>
         ) : (
-          <div className="rounded-[1.75rem] border border-dashed border-stone-300 bg-[#fcf8f2] p-8 text-center text-stone-600">
+          <div className="rounded-[1.75rem] border border-dashed border-stone-300 bg-white p-8 text-center text-stone-600">
             Store map will appear here once an embeddable map link is configured.
           </div>
         )}

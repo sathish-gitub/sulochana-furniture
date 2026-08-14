@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         brand: '#8a4b26',
-        cream: '#f7efe8',
+        cream: '#ffffff',
         whatsapp: '#25D366',
       },
       fontFamily: {

@@ -10,9 +10,9 @@ export default async function CareerPage() {
   const href = `https://wa.me/${settings?.whatsappNumber ?? '917550350009'}?text=${message}`;
 
   return (
-    <div className="bg-cream">
+    <div className="bg-white">
       <section className="mx-auto flex min-h-[70vh] max-w-7xl items-center px-6 py-24 lg:px-8">
-        <div className="w-full rounded-[2rem] border border-stone-200 bg-[#fcf8f2] p-10 shadow-sm lg:p-16">
+        <div className="w-full rounded-[2rem] border border-stone-200 bg-white p-10 shadow-sm lg:p-16">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">Careers</p>
           <h1 className="mt-4 font-display text-4xl text-stone-900 sm:text-5xl">Careers at Sulochana Furniture</h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-700">

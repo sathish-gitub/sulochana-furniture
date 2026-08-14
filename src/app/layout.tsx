@@ -30,7 +30,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-cream font-body text-stone-800 antialiased">
+      <body className="min-h-screen bg-white font-body text-stone-800 antialiased">
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

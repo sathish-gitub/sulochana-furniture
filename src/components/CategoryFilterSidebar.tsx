@@ -34,7 +34,7 @@ export default function CategoryFilterSidebar({ categories, currentCategorySlug,
   const [expanded, setExpanded] = useState<Record<string, boolean>>(initialExpanded);
 
   return (
-    <div className="rounded-[1.5rem] border border-stone-200 bg-[#fcf8f2] p-5 shadow-sm lg:sticky lg:top-28">
+    <div className="rounded-[1.5rem] border border-stone-200 bg-white p-5 shadow-sm lg:sticky lg:top-28">
       <h2 className="font-display text-2xl text-stone-900">Categories</h2>
       <div className="mt-5 space-y-3">
         {categories.map((category) => {

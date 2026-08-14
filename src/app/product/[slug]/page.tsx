@@ -99,7 +99,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const tags = product.tags?.split(',').map((tag) => tag.trim()).filter(Boolean) ?? [];
 
   return (
-    <div className="bg-cream pb-16">
+    <div className="bg-white pb-16">
       <div className="mx-auto max-w-7xl px-6 pt-10 lg:px-8">
         <nav aria-label="Breadcrumb" className="text-sm text-stone-600">
           <ol className="flex items-center gap-2">
@@ -117,7 +117,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </div>
 
       <FadeInSection className="mx-auto mt-6 max-w-7xl px-6 lg:px-8">
-        <section className="grid grid-cols-1 gap-10 rounded-[2rem] border border-stone-200 bg-[#fcf8f2] p-6 shadow-sm lg:grid-cols-[1.05fr_0.95fr] lg:p-10">
+        <section className="grid grid-cols-1 gap-10 rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm lg:grid-cols-[1.05fr_0.95fr] lg:p-10">
           <ProductImageGallery key={product.id} productName={product.name} images={product.images} />
 
           <div className="space-y-6">

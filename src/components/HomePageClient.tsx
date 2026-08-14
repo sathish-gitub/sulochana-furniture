@@ -88,7 +88,7 @@ function CardReveal({ children, index, className }: { children: ReactNode; index
 
 export default function HomePageClient({ banners, categories, settings, testimonials, featuredCategory, secondaryCategory, featuredProducts, secondaryProducts, comboProducts, featureCards, instagramPosts }: HomePageClientProps) {
   return (
-    <div className="bg-cream">
+    <div className="bg-white">
       <div>{/* Home banner slider is rendered by the parent page until we wire it through here */}</div>
       <SectionReveal className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
         <SectionHeading eyebrow="Our Products" title="Product Categories" description="Explore thoughtfully curated collections designed for every room." />
@@ -96,7 +96,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
           {categories.map((category, index) => {
             const hasImage = Boolean(category.image && category.image.trim());
             return (
-              <CardReveal key={category.id} index={index} className="group overflow-hidden rounded-[1.5rem] border border-stone-200 bg-[#fcf8f2] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <CardReveal key={category.id} index={index} className="group overflow-hidden rounded-[1.5rem] border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <Link href={`/category/${category.slug}`} className="block">
                   <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 p-3">
                     {hasImage ? (
@@ -132,11 +132,11 @@ export default function HomePageClient({ banners, categories, settings, testimon
 
       {settings?.storyTitle && settings.storyContent ? (
         <SectionReveal className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-          <div className="grid gap-10 rounded-[2rem] border border-stone-200 bg-[#fcf8f2] p-8 shadow-sm lg:grid-cols-[0.95fr_1.05fr] lg:p-12">
-            <div className="relative min-h-[320px] overflow-hidden rounded-[1.5rem] bg-stone-100 p-3">
-              {settings.storyImage ? (
-                <Image src={settings.storyImage} alt={settings.storyTitle} fill className="rounded-[1.25rem] object-cover" unoptimized />
-              ) : null}
+          <div className="grid gap-10 rounded-[2rem] border border-stone-200 bg-white p-8 shadow-sm lg:grid-cols-[0.95fr_1.05fr] lg:p-12">
+            <div className="relative overflow-hidden rounded-[1.5rem] bg-stone-100 p-3">
+              <div className="relative aspect-[1217/1292] h-full w-full">
+                <Image src="/images/store_photo.png" alt={settings.storyTitle} fill className="rounded-[1.25rem] object-cover" unoptimized />
+              </div>
             </div>
             <div className="flex flex-col justify-center">
               <SectionHeading eyebrow="Why Choose Sulochana Furniture?" title={settings.storyTitle} description={settings.storyContent} centered={false} />
@@ -154,7 +154,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
           {comboProducts.map((product, index) => {
             const imageUrl = product.images?.[0]?.url ?? 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80';
             return (
-              <CardReveal key={product.id} index={index} className="group overflow-hidden rounded-[1.5rem] border border-stone-200 bg-[#fcf8f2] shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <CardReveal key={product.id} index={index} className="group overflow-hidden rounded-[1.5rem] border border-stone-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                 <Link href={`/product/${product.slug}`} className="block">
                   <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 p-3">
                     <Image src={imageUrl} alt={product.name} fill className="rounded-[1.25rem] object-cover transition duration-500 group-hover:scale-105" unoptimized />
@@ -179,7 +179,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
 
       {secondaryCategory ? (
         <SectionReveal className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-          <SectionHeading eyebrow={secondaryCategory.name} title="Office Furniture Collection" description="A second collection of premium pieces for every corner of your home." />
+          <SectionHeading eyebrow={secondaryCategory.name} title={`${secondaryCategory.name} Collection`} description={`Explore standout pieces from our ${secondaryCategory.name.toLowerCase()} selection.`} />
           <HomeProductSlider products={secondaryProducts} whatsappNumber={settings?.whatsappNumber} />
         </SectionReveal>
       ) : null}

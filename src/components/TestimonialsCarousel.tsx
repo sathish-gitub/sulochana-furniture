@@ -45,7 +45,7 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
         <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${testimonialIndex * 100}%)` }}>
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="w-full min-w-full">
-              <article className="mx-auto max-w-4xl rounded-[1.5rem] border border-stone-200 bg-[#fcf8f2] p-8 text-center shadow-sm lg:p-10">
+              <article className="mx-auto max-w-4xl rounded-[1.5rem] border border-stone-200 bg-white p-8 text-center shadow-sm lg:p-10">
                 <div className="mb-4 flex justify-center text-brand">
                   {Array.from({ length: testimonial.rating }).map((_, starIndex) => (
                     <span key={starIndex}>★</span>

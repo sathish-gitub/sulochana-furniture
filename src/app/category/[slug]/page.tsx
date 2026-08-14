@@ -187,7 +187,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const hasHeroImage = Boolean(category.image && category.image.trim());
 
   return (
-    <div className="bg-cream pb-16">
+    <div className="bg-white pb-16">
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 bg-stone-900" />
         {hasHeroImage ? <Image src={category.image!} alt={category.name} fill className="object-cover opacity-60" unoptimized priority /> : null}
@@ -209,7 +209,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </section>
 
       {category.children.length > 0 ? (
-        <section className="border-b border-stone-200 bg-[#fcf8f2]">
+        <section className="border-b border-stone-200 bg-white">
           <div className="mx-auto flex max-w-7xl gap-3 overflow-x-auto px-6 py-5 lg:px-8">
             {category.children.map((child) => (
               <Link
@@ -249,7 +249,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                   whatsappNumber={settings?.whatsappNumber}
                 />
               ) : (
-                <div className="rounded-[1.5rem] border border-dashed border-stone-300 bg-[#fcf8f2] p-10 text-center">
+                <div className="rounded-[1.5rem] border border-dashed border-stone-300 bg-white p-10 text-center">
                   <h3 className="font-display text-2xl text-stone-900">No products here yet</h3>
                   <p className="mt-3 text-stone-600">We are updating this category right now. Please check back soon for new arrivals.</p>
                 </div>

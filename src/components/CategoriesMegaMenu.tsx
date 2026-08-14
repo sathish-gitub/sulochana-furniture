@@ -40,7 +40,7 @@ export default function CategoriesMegaMenu({ categories }: CategoriesMegaMenuPro
         type="button"
         onMouseEnter={() => setOpen(true)}
         onClick={() => setOpen((value) => !value)}
-        className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.24em] text-stone-700 transition hover:text-brand"
+        className="flex items-center gap-2 text-sm font-medium capitalize tracking-normal text-stone-700 transition hover:text-brand"
       >
         <span>Categories</span>
         <ChevronDown className={`h-4 w-4 transition ${open ? 'rotate-180' : ''}`} />

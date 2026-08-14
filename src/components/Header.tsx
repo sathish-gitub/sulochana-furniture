@@ -33,7 +33,7 @@ export default async function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-[60] border-b border-stone-200/70 bg-cream/95 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur">
+    <header className="sticky top-0 z-[60] border-b border-stone-200/70 bg-white/95 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur">
       <div className="hidden bg-[#8a4b26] lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-sm text-white lg:px-8">
           <p className="text-white/90">Crafted interiors, thoughtful details, and timeless comfort.</p>
@@ -64,7 +64,7 @@ export default async function Header() {
             }
 
             return (
-              <Link key={item.id} href={item.href} className="text-sm font-medium uppercase tracking-[0.24em] text-stone-700 transition hover:text-brand">
+              <Link key={item.id} href={item.href} className="text-sm font-medium capitalize tracking-normal text-stone-700 transition hover:text-brand">
                 {item.label}
               </Link>
             );

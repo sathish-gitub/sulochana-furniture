@@ -77,7 +77,7 @@ export default function HomeProductSlider({ products, whatsappNumber }: HomeProd
                   const productUrl = buildProductAbsoluteUrl(product.slug);
 
                   return (
-                    <article key={product.id} className="group min-w-0 overflow-hidden rounded-[1.5rem] border border-stone-200 bg-[#fcf8f2] shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <article key={product.id} className="group min-w-0 overflow-hidden rounded-[1.5rem] border border-stone-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                       <Link href={`/product/${product.slug}`} className="block">
                         <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 p-3">
                           <Image src={imageUrl} alt={product.name} fill className="rounded-[1rem] object-cover transition duration-500 group-hover:scale-105" unoptimized />
