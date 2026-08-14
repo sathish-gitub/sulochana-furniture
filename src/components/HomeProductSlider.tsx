@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { buildProductAbsoluteUrl } from '@/lib/whatsapp';
+import { buildProductAbsoluteUrl, normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
 type HomeProductSliderProps = {
   products: Array<{
@@ -17,6 +17,7 @@ type HomeProductSliderProps = {
 };
 
 export default function HomeProductSlider({ products, whatsappNumber }: HomeProductSliderProps) {
+  const normalizedWhatsAppNumber = normalizeWhatsAppNumber(whatsappNumber);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(1);
 
@@ -87,9 +88,7 @@ export default function HomeProductSlider({ products, whatsappNumber }: HomeProd
                         <Link href={`/product/${product.slug}`} className="block">
                           <h3 className="font-display text-xl text-stone-800">{product.name}</h3>
                         </Link>
-                        {whatsappNumber ? (
-                          <WhatsAppButton phone={whatsappNumber} productName={product.name} productUrl={productUrl} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white" />
-                        ) : null}
+                        <WhatsAppButton phone={normalizedWhatsAppNumber} productName={product.name} productUrl={productUrl} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white" />
                       </div>
                     </article>
                   );

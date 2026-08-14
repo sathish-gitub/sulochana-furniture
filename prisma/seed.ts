@@ -361,110 +361,108 @@ async function ensureBanners(prismaClient: PrismaClient | Prisma.TransactionClie
 export async function seedDatabase(prismaClient: PrismaClient) {
   const categoryRecords = buildCategoryRecords();
 
-  await prismaClient.$transaction(async (tx) => {
-    await ensureSiteSettings(tx);
-    await ensureBanners(tx);
+  await ensureSiteSettings(prismaClient);
+  await ensureBanners(prismaClient);
 
-    await tx.productAttribute.deleteMany();
-    await tx.productImage.deleteMany();
-    await tx.product.deleteMany();
+  await prismaClient.productAttribute.deleteMany();
+  await prismaClient.productImage.deleteMany();
+  await prismaClient.product.deleteMany();
 
-    const categoriesBySlug = new Map<string, { id: string; slug: string }>();
-    const orderedCategories = Array.from(categoryRecords.values()).sort((left, right) => {
-      if (left.parentSlug === right.parentSlug) {
-        return (left.order ?? 0) - (right.order ?? 0) || left.name.localeCompare(right.name);
-      }
-
-      if (left.parentSlug === null) return -1;
-      if (right.parentSlug === null) return 1;
-      return left.name.localeCompare(right.name);
-    });
-
-    for (const categoryRecord of orderedCategories) {
-      const parentId = categoryRecord.parentSlug ? categoriesBySlug.get(categoryRecord.parentSlug)?.id ?? null : null;
-      const category = await ensureCategory(tx, categoryRecord, parentId);
-      categoriesBySlug.set(category.slug, { id: category.id, slug: category.slug });
+  const categoriesBySlug = new Map<string, { id: string; slug: string }>();
+  const orderedCategories = Array.from(categoryRecords.values()).sort((left, right) => {
+    if (left.parentSlug === right.parentSlug) {
+      return (left.order ?? 0) - (right.order ?? 0) || left.name.localeCompare(right.name);
     }
 
-    for (const item of catalog) {
-      const assignedCategorySlug = item.subcategory?.slug ?? item.category.slug;
-      const assignedCategory = categoriesBySlug.get(assignedCategorySlug);
+    if (left.parentSlug === null) return -1;
+    if (right.parentSlug === null) return 1;
+    return left.name.localeCompare(right.name);
+  });
 
-      if (!assignedCategory) {
-        throw new Error(`Missing seeded category for product ${item.name}`);
-      }
+  for (const categoryRecord of orderedCategories) {
+    const parentId = categoryRecord.parentSlug ? categoriesBySlug.get(categoryRecord.parentSlug)?.id ?? null : null;
+    const category = await ensureCategory(prismaClient, categoryRecord, parentId);
+    categoriesBySlug.set(category.slug, { id: category.id, slug: category.slug });
+  }
 
-      const product = await tx.product.create({
-        data: {
-          name: item.name,
-          slug: slugify(item.name),
-          sku: item.sku,
-          description: item.description,
-          brand: 'Sulochana',
-          tags: item.tags?.join(', '),
-          status: 'ACTIVE',
-          categoryId: assignedCategory.id,
-        },
-      });
+  for (const item of catalog) {
+    const assignedCategorySlug = item.subcategory?.slug ?? item.category.slug;
+    const assignedCategory = categoriesBySlug.get(assignedCategorySlug);
 
-      await tx.productImage.createMany({
-        data: [1, 2, 3, 4].map((imageNumber, index) => ({
-          productId: product.id,
-          url: `/images/${item.folder}/${imageNumber}.png`,
-          order: index,
-        })),
-      });
-
-      if (item.attributes.length > 0) {
-        await tx.productAttribute.createMany({
-          data: item.attributes.map((attribute) => ({
-            productId: product.id,
-            label: attribute.label,
-            value: attribute.value,
-          })),
-        });
-      }
+    if (!assignedCategory) {
+      throw new Error(`Missing seeded category for product ${item.name}`);
     }
 
-    const keepSlugs = new Set(categoryRecords.keys());
-    const allCategories = await tx.category.findMany({
-      select: {
-        id: true,
-        slug: true,
-        parentId: true,
+    const product = await prismaClient.product.create({
+      data: {
+        name: item.name,
+        slug: slugify(item.name),
+        sku: item.sku,
+        description: item.description,
+        brand: 'Sulochana',
+        tags: item.tags?.join(', '),
+        status: 'ACTIVE',
+        categoryId: assignedCategory.id,
       },
     });
 
-    const staleCategories = allCategories.filter((category) => !keepSlugs.has(category.slug));
+    await prismaClient.productImage.createMany({
+      data: [1, 2, 3, 4].map((imageNumber, index) => ({
+        productId: product.id,
+        url: `/images/${item.folder}/${imageNumber}.png`,
+        order: index,
+      })),
+    });
 
-    if (staleCategories.length > 0) {
-      const staleIds = staleCategories.map((category) => category.id);
-
-      await tx.menuItem.updateMany({
-        where: { categoryId: { in: staleIds } },
-        data: { categoryId: null },
+    if (item.attributes.length > 0) {
+      await prismaClient.productAttribute.createMany({
+        data: item.attributes.map((attribute) => ({
+          productId: product.id,
+          label: attribute.label,
+          value: attribute.value,
+        })),
       });
-
-      const categoryById = new Map(allCategories.map((category) => [category.id, category]));
-      const staleCategoriesWithDepth = staleCategories.map((category) => {
-        let depth = 0;
-        let currentParentId = category.parentId;
-
-        while (currentParentId) {
-          depth += 1;
-          currentParentId = categoryById.get(currentParentId)?.parentId ?? null;
-        }
-
-        return { ...category, depth };
-      });
-
-      staleCategoriesWithDepth.sort((left, right) => right.depth - left.depth);
-
-      for (const category of staleCategoriesWithDepth) {
-        await tx.category.delete({ where: { id: category.id } });
-      }
     }
+  }
+
+  const keepSlugs = new Set(categoryRecords.keys());
+  const allCategories = await prismaClient.category.findMany({
+    select: {
+      id: true,
+      slug: true,
+      parentId: true,
+    },
   });
+
+  const staleCategories = allCategories.filter((category) => !keepSlugs.has(category.slug));
+
+  if (staleCategories.length > 0) {
+    const staleIds = staleCategories.map((category) => category.id);
+
+    await prismaClient.menuItem.updateMany({
+      where: { categoryId: { in: staleIds } },
+      data: { categoryId: null },
+    });
+
+    const categoryById = new Map(allCategories.map((category) => [category.id, category]));
+    const staleCategoriesWithDepth = staleCategories.map((category) => {
+      let depth = 0;
+      let currentParentId = category.parentId;
+
+      while (currentParentId) {
+        depth += 1;
+        currentParentId = categoryById.get(currentParentId)?.parentId ?? null;
+      }
+
+      return { ...category, depth };
+    });
+
+    staleCategoriesWithDepth.sort((left, right) => right.depth - left.depth);
+
+    for (const category of staleCategoriesWithDepth) {
+      await prismaClient.category.delete({ where: { id: category.id } });
+    }
+  }
 
   console.log(`Seeded ${catalog.length} catalog products across ${Array.from(categoryRecords.values()).filter((category) => category.treeProductCount > 0).length} surviving categories.`);
 }

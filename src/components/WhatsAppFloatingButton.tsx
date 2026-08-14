@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa';
+import { normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
 type WhatsAppFloatingButtonProps = {
   phone: string;
@@ -9,7 +10,7 @@ type WhatsAppFloatingButtonProps = {
 };
 
 export default function WhatsAppFloatingButton({ phone, label = 'Contact us' }: WhatsAppFloatingButtonProps) {
-  const href = `https://wa.me/${phone}`;
+  const href = `https://wa.me/${normalizeWhatsAppNumber(phone)}`;
 
   return (
     <Link

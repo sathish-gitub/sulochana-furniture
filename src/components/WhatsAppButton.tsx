@@ -1,6 +1,7 @@
 'use client';
 
 import { FaWhatsapp } from 'react-icons/fa';
+import { normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
 type WhatsAppButtonProps = {
   phone: string;
@@ -10,8 +11,9 @@ type WhatsAppButtonProps = {
 };
 
 export default function WhatsAppButton({ phone, productName, productUrl, className }: WhatsAppButtonProps) {
+  const safePhone = normalizeWhatsAppNumber(phone);
   const message = encodeURIComponent(`Hello! I’m interested in ${productName}. I found it here: ${productUrl}`);
-  const href = `https://wa.me/${phone}?text=${message}`;
+  const href = `https://wa.me/${safePhone}?text=${message}`;
 
   return (
     <a

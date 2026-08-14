@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 import { prisma, safePrismaQuery } from '@/lib/prisma';
+import { normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await safePrismaQuery(() => prisma.siteSetting.findUnique({ where: { id: 'singleton' } }), null);
+  const whatsappNumber = normalizeWhatsAppNumber(settings?.whatsappNumber);
 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
@@ -35,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-          {settings?.whatsappNumber ? <WhatsAppFloatingButton phone={settings.whatsappNumber} /> : null}
+          <WhatsAppFloatingButton phone={whatsappNumber} />
         </div>
       </body>
     </html>

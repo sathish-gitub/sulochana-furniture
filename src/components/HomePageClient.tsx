@@ -12,6 +12,7 @@ import HomeProductSlider from '@/components/HomeProductSlider';
 import { buildProductAbsoluteUrl } from '@/lib/whatsapp';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import { normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
 type BannerItem = {
   id: string;
@@ -87,6 +88,8 @@ function CardReveal({ children, index, className }: { children: ReactNode; index
 }
 
 export default function HomePageClient({ banners, categories, settings, testimonials, featuredCategory, secondaryCategory, featuredProducts, secondaryProducts, comboProducts, featureCards, instagramPosts }: HomePageClientProps) {
+  const whatsappNumber = normalizeWhatsAppNumber(settings?.whatsappNumber);
+
   return (
     <div className="bg-white">
       <div>{/* Home banner slider is rendered by the parent page until we wire it through here */}</div>
@@ -126,7 +129,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
       {featuredCategory ? (
         <SectionReveal className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
           <SectionHeading eyebrow="Sofas" title="Sofas Collection" description="Browse our most-loved sofa pieces, including products across this category hierarchy." />
-          <HomeProductSlider products={featuredProducts} whatsappNumber={settings?.whatsappNumber} />
+          <HomeProductSlider products={featuredProducts} whatsappNumber={whatsappNumber} />
         </SectionReveal>
       ) : null}
 
@@ -164,9 +167,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
                   <Link href={`/product/${product.slug}`} className="block">
                     <h3 className="font-display text-xl text-stone-800">{product.name}</h3>
                   </Link>
-                  {settings?.whatsappNumber ? (
-                    <WhatsAppButton phone={settings.whatsappNumber} productName={product.name} productUrl={buildProductAbsoluteUrl(product.slug)} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white" />
-                  ) : null}
+                  <WhatsAppButton phone={whatsappNumber} productName={product.name} productUrl={buildProductAbsoluteUrl(product.slug)} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white" />
                 </div>
               </CardReveal>
             );
@@ -180,7 +181,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
       {secondaryCategory ? (
         <SectionReveal className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
           <SectionHeading eyebrow={secondaryCategory.name} title={`${secondaryCategory.name} Collection`} description={`Explore standout pieces from our ${secondaryCategory.name.toLowerCase()} selection.`} />
-          <HomeProductSlider products={secondaryProducts} whatsappNumber={settings?.whatsappNumber} />
+          <HomeProductSlider products={secondaryProducts} whatsappNumber={whatsappNumber} />
         </SectionReveal>
       ) : null}
 

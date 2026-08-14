@@ -6,8 +6,9 @@ export const dynamic = 'force-dynamic';
 
 export default async function CareerPage() {
   const settings = await safePrismaQuery(() => prisma.siteSetting.findUnique({ where: { id: 'singleton' } }), null);
+  const normalizedPhone = settings?.whatsappNumber?.replace(/[^\d]/g, '').trim() || '917550350009';
   const message = encodeURIComponent('Hello! I am interested in joining the Sulochana Furniture team.');
-  const href = `https://wa.me/${settings?.whatsappNumber ?? '917550350009'}?text=${message}`;
+  const href = `https://wa.me/${normalizedPhone}?text=${message}`;
 
   return (
     <div className="bg-white">

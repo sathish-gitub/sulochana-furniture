@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import ProductCard from '@/components/ProductCard';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { buildProductAbsoluteUrl } from '@/lib/whatsapp';
+import { buildProductAbsoluteUrl, normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
 type GridProduct = {
   id: string;
@@ -19,6 +19,8 @@ type StaggeredCategoryProductGridProps = {
 };
 
 export default function StaggeredCategoryProductGrid({ products, whatsappNumber, categoryName }: StaggeredCategoryProductGridProps) {
+  const normalizedWhatsAppNumber = normalizeWhatsAppNumber(whatsappNumber);
+
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {products.map((product, index) => (
@@ -31,14 +33,12 @@ export default function StaggeredCategoryProductGrid({ products, whatsappNumber,
           className="space-y-3"
         >
           <ProductCard product={product} categoryName={categoryName} />
-          {whatsappNumber ? (
-            <WhatsAppButton
-              phone={whatsappNumber}
-              productName={product.name}
-              productUrl={buildProductAbsoluteUrl(product.slug)}
-              className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
-            />
-          ) : null}
+          <WhatsAppButton
+            phone={normalizedWhatsAppNumber}
+            productName={product.name}
+            productUrl={buildProductAbsoluteUrl(product.slug)}
+            className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
+          />
         </motion.div>
       ))}
     </div>

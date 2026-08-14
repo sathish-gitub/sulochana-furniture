@@ -8,6 +8,11 @@ function normalizeSiteUrl(url: string) {
   return withProtocol.replace(/\/$/, '');
 }
 
+export function normalizeWhatsAppNumber(value?: string | null) {
+  const digits = value?.replace(/[^\d]/g, '').trim();
+  return digits || '917550350009';
+}
+
 export function getSiteUrl() {
   return normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL);
 }

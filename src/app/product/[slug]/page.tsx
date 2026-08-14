@@ -7,7 +7,7 @@ import RelatedProductsRail from '@/components/RelatedProductsRail';
 import SectionHeading from '@/components/SectionHeading';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { prisma, safePrismaQuery } from '@/lib/prisma';
-import { buildProductAbsoluteUrl } from '@/lib/whatsapp';
+import { buildProductAbsoluteUrl, normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
 export const dynamic = 'force-dynamic';
 
@@ -97,6 +97,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const stockLabel = product.status === 'OUT_OF_STOCK' ? 'Out of Stock' : product.status === 'ACTIVE' ? 'In Stock' : 'Unavailable';
   const stockClasses = product.status === 'OUT_OF_STOCK' ? 'bg-rose-100 text-rose-700' : product.status === 'ACTIVE' ? 'bg-emerald-100 text-emerald-700' : 'bg-stone-200 text-stone-700';
   const tags = product.tags?.split(',').map((tag) => tag.trim()).filter(Boolean) ?? [];
+  const whatsappNumber = normalizeWhatsAppNumber(settings?.whatsappNumber);
 
   return (
     <div className="bg-white pb-16">
@@ -129,9 +130,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
             {product.description ? <p className="text-base leading-8 text-stone-700">{product.description}</p> : null}
 
-            {settings?.whatsappNumber ? (
+            {whatsappNumber ? (
               <WhatsAppButton
-                phone={settings.whatsappNumber}
+                phone={whatsappNumber}
                 productName={product.name}
                 productUrl={buildProductAbsoluteUrl(product.slug)}
                 className="inline-flex w-full items-center justify-center rounded-full bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-[#1ea952]"
