@@ -122,7 +122,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
         </div>
       </SectionReveal>
 
-      <SectionReveal className="bg-[#8a4b26]">
+      <SectionReveal className="bg-brandBg">
         <WhyChooseUsSection featureCards={featureCards} />
       </SectionReveal>
 
@@ -143,7 +143,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
             </div>
             <div className="flex flex-col justify-center">
               <SectionHeading eyebrow="Why Choose Sulochana Furniture?" title={settings.storyTitle} description={settings.storyContent} centered={false} />
-              <Link href="/about" className="mt-8 inline-flex w-fit items-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand/90">
+              <Link href="/about" className="mt-8 inline-flex w-fit items-center rounded-full bg-brandBg px-6 py-3 text-sm font-semibold text-white transition hover:bg-brandBg/90">
                 Know More
               </Link>
             </div>
@@ -167,7 +167,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
                   <Link href={`/product/${product.slug}`} className="block">
                     <h3 className="font-display text-xl text-stone-800">{product.name}</h3>
                   </Link>
-                  <WhatsAppButton phone={whatsappNumber} productName={product.name} productUrl={buildProductAbsoluteUrl(product.slug)} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white" />
+                  <WhatsAppButton phone={whatsappNumber} productName={product.name} productUrl={buildProductAbsoluteUrl(product.slug)} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brandBg hover:text-white" />
                 </div>
               </CardReveal>
             );
@@ -187,7 +187,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
 
       <SectionReveal className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
         <div className="flex justify-center">
-          <Link href="https://www.instagram.com/sulochana_furniture/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 rounded-full border border-brand/20 bg-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.28em] text-brand shadow-sm transition hover:border-brand hover:bg-brand hover:text-white">
+          <Link href="https://www.instagram.com/sulochana_furniture/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 rounded-full border border-brand/20 bg-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.28em] text-brand shadow-sm transition hover:border-brand hover:bg-brandBg hover:text-white">
             <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
               <path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm0 1.8A2.7 2.7 0 0 0 4.8 7.5v9a2.7 2.7 0 0 0 2.7 2.7h9a2.7 2.7 0 0 0 2.7-2.7v-9a2.7 2.7 0 0 0-2.7-2.7h-9Zm4.5 2.4a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6Zm0 1.8a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.1-.9a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z" />
             </svg>

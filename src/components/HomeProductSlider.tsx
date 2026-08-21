@@ -88,7 +88,7 @@ export default function HomeProductSlider({ products, whatsappNumber }: HomeProd
                         <Link href={`/product/${product.slug}`} className="block">
                           <h3 className="font-display text-xl text-stone-800">{product.name}</h3>
                         </Link>
-                        <WhatsAppButton phone={normalizedWhatsAppNumber} productName={product.name} productUrl={productUrl} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white" />
+                        <WhatsAppButton phone={normalizedWhatsAppNumber} productName={product.name} productUrl={productUrl} className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brandBg hover:text-white" />
                       </div>
                     </article>
                   );

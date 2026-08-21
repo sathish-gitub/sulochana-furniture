@@ -62,13 +62,13 @@ export default async function ContactPage() {
                 <textarea rows={5} placeholder="Tell us what furniture you are looking for..." className="w-full resize-y rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm text-stone-800 outline-none transition focus:border-brand" />
               </label>
 
-              <button type="submit" className="inline-flex items-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand/90">
+              <button type="submit" className="inline-flex items-center rounded-full bg-brandBg px-6 py-3 text-sm font-semibold text-white transition hover:bg-brandBg/90">
                 Send Message
               </button>
             </form>
           </section>
 
-          <aside className="rounded-[1.75rem] border border-brand/20 bg-brand/5 p-6 shadow-sm lg:p-8">
+          <aside className="rounded-[1.75rem] border border-brand/20 bg-brandBg/5 p-6 shadow-sm lg:p-8">
             <h2 className="font-display text-3xl text-stone-900">Contact Info</h2>
             <div className="mt-6 space-y-5 text-sm text-stone-700">
               <div>

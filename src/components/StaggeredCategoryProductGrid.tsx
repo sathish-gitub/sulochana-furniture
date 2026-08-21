@@ -37,7 +37,7 @@ export default function StaggeredCategoryProductGrid({ products, whatsappNumber,
             phone={normalizedWhatsAppNumber}
             productName={product.name}
             productUrl={buildProductAbsoluteUrl(product.slug)}
-            className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
+            className="inline-flex w-full items-center justify-center rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brandBg hover:text-white"
           />
         </motion.div>
       ))}

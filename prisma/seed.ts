@@ -234,6 +234,68 @@ const catalog: ProductSeed[] = [
     category: { name: 'Living Storage', slug: 'living-storage', description: 'Storage and display furniture for living areas.', image: '/images/TV_Wall_Unit/1.png', order: 6 },
     subcategory: { name: 'TV Unit', slug: 'tv-unit', description: 'Streamlined TV units for entertainment spaces.', image: '/images/TV_Wall_Unit/1.png' },
   },
+  {
+    folder: '3_seater_sofa',
+    name: '3 Seater Sofa',
+    sku: 'SUL-017',
+    description: 'A compact three-seater sofa with a clean upholstered build and a comfortable everyday living-room style.',
+    tags: ['sofa', '3 seater', 'living room'],
+    attributes: [
+      { label: 'Material', value: 'Wood frame with upholstered seating' },
+      { label: 'Seating', value: '3 seater' },
+    ],
+    category: { name: 'Sofas', slug: 'sofas', description: 'Comfortable seating crafted with timeless detailing.', image: '/images/Sofas/1.png', order: 2 },
+    subcategory: { name: '3+2 Sofas', slug: '3plus2-sofas', description: 'Classic 3-seater and 2-seater sofa sets.', image: '/images/3_seater_sofa/1.png' },
+  },
+  {
+    folder: 'wooden_chair',
+    name: 'Wooden Chair',
+    sku: 'SUL-018',
+    description: 'A solid wooden chair with a traditional form, sturdy joinery, and a timeless accent-seating style.',
+    tags: ['chair', 'wooden', 'accent seating'],
+    attributes: [
+      { label: 'Material', value: 'Wood' },
+      { label: 'Style', value: 'Traditional accent chair' },
+    ],
+    category: { name: 'Sofas', slug: 'sofas', description: 'Comfortable seating crafted with timeless detailing.', image: '/images/Sofas/1.png', order: 2 },
+    subcategory: { name: 'Chairs', slug: 'chairs', description: 'Individual accent chairs for any seating corner.', image: '/images/wooden_chair/1.png' },
+  },
+  {
+    folder: 'blue_diwan',
+    name: 'Blue Diwan',
+    sku: 'SUL-019',
+    description: 'A vibrant blue upholstered diwan with a low-profile wooden frame — ideal for relaxed lounging and compact spaces.',
+    tags: ['diwan', 'blue', 'lounge'],
+    attributes: [
+      { label: 'Material', value: 'Wood frame with upholstered seating' },
+      { label: 'Colour', value: 'Blue' },
+    ],
+    category: { name: 'Diwans', slug: 'diwans', description: 'Low-seated diwans for relaxed traditional living.', image: '/images/blue_diwan/1.png', order: 7 },
+  },
+  {
+    folder: 'yellow_diwan',
+    name: 'Yellow Diwan',
+    sku: 'SUL-020',
+    description: 'A cheerful yellow upholstered diwan with a sturdy wooden base, bringing warmth and colour to any room.',
+    tags: ['diwan', 'yellow', 'lounge'],
+    attributes: [
+      { label: 'Material', value: 'Wood frame with upholstered seating' },
+      { label: 'Colour', value: 'Yellow' },
+    ],
+    category: { name: 'Diwans', slug: 'diwans', description: 'Low-seated diwans for relaxed traditional living.', image: '/images/blue_diwan/1.png', order: 7 },
+  },
+  {
+    folder: 'wooden_swing2',
+    name: 'Wooden Swing',
+    sku: 'SUL-021',
+    description: 'A beautifully carved wooden swing with decorative detailing — a classic statement piece for any living space.',
+    tags: ['swing', 'wooden', 'living room'],
+    attributes: [
+      { label: 'Material', value: 'Wood' },
+      { label: 'Style', value: 'Decorative indoor swing' },
+    ],
+    category: { name: 'Swings', slug: 'swings', description: 'Handcrafted wooden swings for traditional and contemporary homes.', image: '/images/wooden_swing2/1.png', order: 8 },
+  },
 ];
 
 function slugify(value: string) {

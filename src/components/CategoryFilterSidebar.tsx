@@ -69,7 +69,7 @@ export default function CategoryFilterSidebar({ categories, currentCategorySlug,
                       <li key={child.id}>
                         <Link
                           href={`/category/${child.slug}`}
-                          className={`block rounded-full px-3 py-1.5 text-sm transition ${isCurrentChild ? 'bg-brand text-white' : 'bg-stone-100 text-stone-600 hover:bg-brand/10 hover:text-brand'}`}
+                          className={`block rounded-full px-3 py-1.5 text-sm transition ${isCurrentChild ? 'bg-brandBg text-white' : 'bg-stone-100 text-stone-600 hover:bg-brandBg/10 hover:text-brand'}`}
                         >
                           {child.name}
                         </Link>

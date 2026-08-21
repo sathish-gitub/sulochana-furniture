@@ -1,17 +1,25 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { unstable_noStore as noStore } from 'next/cache';
 import MobileNav from '@/components/MobileNav';
 import HeaderSearch from '@/components/HeaderSearch';
 import CategoriesMegaMenu from '@/components/CategoriesMegaMenu';
 import { prisma, safePrismaQuery } from '@/lib/prisma';
 
 export default async function Header() {
+  noStore();
   const [settings, categories] = await Promise.all([
     safePrismaQuery(() => prisma.siteSetting.findUnique({ where: { id: 'singleton' } }), null),
     safePrismaQuery(
       () =>
         prisma.category.findMany({
-          where: { parentId: null },
+          where: {
+            parentId: null,
+            OR: [
+              { products: { some: {} } },
+              { children: { some: {} } },
+            ],
+          },
           include: {
             children: {
               select: { id: true, name: true, slug: true },
@@ -37,7 +45,7 @@ export default async function Header() {
 
   return (
     <header className="sticky top-0 z-[60] border-b border-stone-200/70 bg-white/95 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur">
-      <div className="hidden bg-[#8a4b26] lg:block">
+      <div className="hidden bg-brandBg lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-sm text-white lg:px-8">
           <p className="text-white/90">Crafted interiors, thoughtful details, and timeless comfort.</p>
           <div className="flex flex-wrap items-center gap-5">

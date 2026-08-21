@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         brand: '#8a4b26',
+        brandBg: '#767f42',
         cream: '#ffffff',
         whatsapp: '#25D366',
       },
