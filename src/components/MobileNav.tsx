@@ -13,6 +13,11 @@ type CategoryNode = {
     name: string;
     slug: string;
   }>;
+  products: Array<{
+    id: string;
+    name: string;
+    slug: string;
+  }>;
 };
 
 type NavItem = {
@@ -84,12 +89,19 @@ export default function MobileNav({ items, categories = [] }: MobileNavProps) {
                           <Link href={`/category/${category.slug}`} onClick={() => setOpen(false)} className="block px-2 py-1 text-sm font-semibold text-stone-800 transition hover:text-brand">
                             {category.name}
                           </Link>
-                          {category.children.length > 0 ? (
+                          {category.children.length > 0 || category.products.length > 0 ? (
                             <ul className="mt-2 space-y-1 pl-3">
                               {category.children.map((child) => (
                                 <li key={child.id}>
                                   <Link href={`/category/${child.slug}`} onClick={() => setOpen(false)} className="block text-sm text-stone-600 transition hover:text-brand">
                                     {child.name}
+                                  </Link>
+                                </li>
+                              ))}
+                              {category.products.map((product) => (
+                                <li key={product.id}>
+                                  <Link href={`/product/${product.slug}`} onClick={() => setOpen(false)} className="block text-sm text-stone-600 transition hover:text-brand">
+                                    {product.name}
                                   </Link>
                                 </li>
                               ))}

@@ -419,10 +419,9 @@ async function ensureSiteSettings(prismaClient: PrismaClient | Prisma.Transactio
 
 async function ensureBanners(prismaClient: PrismaClient | Prisma.TransactionClient) {
   const bannerRows = [
-    { image: '/images/slider/slider_1.jpg', title: null, subtitle: null, ctaLabel: null, ctaUrl: null, order: 1, active: true },
-    { image: '/images/slider/slider_2.jpg', title: null, subtitle: null, ctaLabel: null, ctaUrl: null, order: 2, active: true },
-    { image: '/images/slider/slider_3.jpg', title: null, subtitle: null, ctaLabel: null, ctaUrl: null, order: 3, active: true },
-    { image: '/images/slider/slider_4.jpg', title: null, subtitle: null, ctaLabel: null, ctaUrl: null, order: 4, active: true },
+    { image: '/images/slider/slider_2.jpg', title: null, subtitle: null, ctaLabel: null, ctaUrl: null, order: 1, active: true },
+    { image: '/images/slider/slider_3.jpg', title: null, subtitle: null, ctaLabel: null, ctaUrl: null, order: 2, active: true },
+    { image: '/images/slider/slider_4.jpg', title: null, subtitle: null, ctaLabel: null, ctaUrl: null, order: 3, active: true },
   ];
 
   await prismaClient.banner.deleteMany();

@@ -17,14 +17,19 @@ const defaultFeatureCards: FeatureCard[] = [
   { icon: 'shield', title: 'Premium Quality' },
   { icon: 'leaf', title: 'Sustainable Materials' },
   { icon: 'headset', title: 'Customer Support' },
-  { icon: 'truck', title: 'Swift Delivery' },
+  { icon: 'truck', title: 'Fast Delivery' },
 ];
 
 export default function WhyChooseUsSection({ featureCards = defaultFeatureCards }: WhyChooseUsSectionProps) {
   return (
-    <section className="bg-brandBg">
+    <section
+      className="bg-brandBg bg-cover bg-center"
+      style={{ backgroundImage: "url('/images/why_choose_bg.png')" }}
+    >
+      {/* Semi-transparent overlay keeps image as very subtle texture */}
+      <div className="bg-brandBg/85">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-        <div className="rounded-[2rem] bg-brandBg p-8 text-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] lg:p-12">
+        <div className="rounded-[2rem] p-8 text-white lg:p-12">
           <SectionHeading
             eyebrow="Why Choose Us"
             title="Elevate Your Home Comfort"
@@ -56,6 +61,7 @@ export default function WhyChooseUsSection({ featureCards = defaultFeatureCards 
             })}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

@@ -13,6 +13,11 @@ type CategoryNode = {
     name: string;
     slug: string;
   }>;
+  products: Array<{
+    id: string;
+    name: string;
+    slug: string;
+  }>;
 };
 
 type CategoriesMegaMenuProps = {
@@ -57,12 +62,19 @@ export default function CategoriesMegaMenu({ categories }: CategoriesMegaMenuPro
                 <Link href={`/category/${category.slug}`} onClick={() => setOpen(false)} className="font-display text-lg font-semibold text-stone-900 transition hover:text-brand">
                   {category.name}
                 </Link>
-                {category.children.length > 0 ? (
+                {category.children.length > 0 || category.products.length > 0 ? (
                   <ul className="mt-3 space-y-2">
                     {category.children.map((child) => (
                       <li key={child.id}>
                         <Link href={`/category/${child.slug}`} onClick={() => setOpen(false)} className="block text-sm text-stone-600 transition hover:text-brand">
                           {child.name}
+                        </Link>
+                      </li>
+                    ))}
+                    {category.products.map((product) => (
+                      <li key={product.id}>
+                        <Link href={`/product/${product.slug}`} onClick={() => setOpen(false)} className="block text-sm text-stone-600 transition hover:text-brand">
+                          {product.name}
                         </Link>
                       </li>
                     ))}

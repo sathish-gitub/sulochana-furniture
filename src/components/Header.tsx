@@ -22,8 +22,14 @@ export default async function Header() {
           },
           include: {
             children: {
+              where: { products: { some: {} } },
               select: { id: true, name: true, slug: true },
               orderBy: { order: 'asc' },
+            },
+            products: {
+              where: { status: 'ACTIVE' },
+              select: { id: true, name: true, slug: true },
+              orderBy: { name: 'asc' },
             },
           },
           orderBy: { order: 'asc' },
@@ -71,7 +77,7 @@ export default async function Header() {
         <nav aria-label="Main navigation" className="hidden items-center gap-6 md:flex">
           {mainNavItems.map((item) => {
             if (item.id === 'categories') {
-              return <CategoriesMegaMenu key={item.id} categories={categories.map((category) => ({ id: category.id, name: category.name, slug: category.slug, children: category.children }))} />;
+              return <CategoriesMegaMenu key={item.id} categories={categories.map((category) => ({ id: category.id, name: category.name, slug: category.slug, children: category.children, products: category.products }))} />;
             }
 
             return (
@@ -84,7 +90,7 @@ export default async function Header() {
 
         <div className="flex items-center gap-3">
           <HeaderSearch />
-          <MobileNav items={mainNavItems.filter((item) => item.id !== 'categories').map((item) => ({ id: item.id, label: item.label, href: item.href }))} categories={categories.map((category) => ({ id: category.id, name: category.name, slug: category.slug, children: category.children }))} />
+          <MobileNav items={mainNavItems.filter((item) => item.id !== 'categories').map((item) => ({ id: item.id, label: item.label, href: item.href }))} categories={categories.map((category) => ({ id: category.id, name: category.name, slug: category.slug, children: category.children, products: category.products }))} />
         </div>
       </div>
     </header>

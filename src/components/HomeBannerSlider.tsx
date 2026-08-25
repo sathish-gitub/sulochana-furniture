@@ -33,7 +33,6 @@ export default function HomeBannerSlider({ banners }: HomeBannerSliderProps) {
   const goToSlide = (index: number) => setActiveIndex(index);
 
   const bannerDimensions = {
-    '/images/slider/slider_1.jpg': { width: 2172, height: 724 },
     '/images/slider/slider_2.jpg': { width: 1350, height: 450 },
     '/images/slider/slider_3.jpg': { width: 1350, height: 450 },
     '/images/slider/slider_4.jpg': { width: 1350, height: 450 },

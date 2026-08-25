@@ -128,7 +128,7 @@ export default async function HomePage() {
     { icon: 'shield', title: 'Premium Quality' },
     { icon: 'leaf', title: 'Sustainable Materials' },
     { icon: 'headset', title: 'Customer Support' },
-    { icon: 'truck', title: 'Swift Delivery' },
+    { icon: 'truck', title: 'Fast Delivery' },
   ];
 
   const instagramPosts = [
