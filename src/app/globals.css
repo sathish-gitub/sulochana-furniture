@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Page-transition loader ring — only the ring span rotates, never the icon */
+@keyframes loader-ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+.page-loader-ring {
+  border: 2.5px solid #1a1a1a;
+  /* gap in the ring: make ~90° arc transparent */
+  border-right-color: transparent;
+  animation: loader-ring-spin 0.9s linear infinite;
+}
+
 :root {
   color-scheme: light;
 }

@@ -4,6 +4,7 @@ import '../app/globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
+import PageTransitionProvider from '@/components/PageTransitionProvider';
 import { prisma, safePrismaQuery } from '@/lib/prisma';
 import { normalizeWhatsAppNumber } from '@/lib/whatsapp';
 
@@ -35,7 +36,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen bg-white font-body text-stone-800 antialiased">
         <div className="flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
+          <PageTransitionProvider>
+            <main className="flex-1">{children}</main>
+          </PageTransitionProvider>
           <Footer />
           <WhatsAppFloatingButton phone={whatsappNumber} />
         </div>
