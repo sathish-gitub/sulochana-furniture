@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 type FadeInSectionProps = {
@@ -9,11 +10,22 @@ type FadeInSectionProps = {
 };
 
 export default function FadeInSection({ children, className }: FadeInSectionProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  // amount:0.1 — trigger once at least 10% is visible
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start({ opacity: 1, y: 0 });
+    }
+  }, [isInView, controls]);
+
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      animate={controls}
       transition={{ duration: 0.5 }}
       className={className}
     >
