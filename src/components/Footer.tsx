@@ -22,7 +22,7 @@ export default async function Footer() {
   ];
   const quickLinks = footerItems.length > 0 ? footerItems.map((item) => ({ label: item.label, href: item.url ?? '/' })) : defaultQuickLinks;
   const contactPhone = settings?.contactPhone?.trim() || '+91 75503 50009';
-  const contactEmail = settings?.contactEmail?.trim() || 'hello@sulochanafurniture.com';
+  const contactEmail = settings?.contactEmail?.trim() || 'sulochafurniture.superstore@gmail.com';
   const address = settings?.address?.trim() || '1A2, Udumalai Road, Chinnampalayam, Pollachi';
   const mapUrl = settings?.mapEmbedUrl?.trim() || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62736.145047295286!2d76.99011189213536!3d10.656403139824079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba837b4b87bae69%3A0xc458ac7e19f5f4a0!2sSulochana%20Furniture!5e0!3m2!1sen!2sus!4v1787731444451!5m2!1sen!2sus';
 

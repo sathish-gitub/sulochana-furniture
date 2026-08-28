@@ -47,7 +47,7 @@ export default async function Header() {
   ];
   const address = settings?.address?.trim() || '1A2, Udumalai Road, Chinnampalayam, Pollachi';
   const contactPhone = settings?.contactPhone?.trim() || '+91 75503 50009';
-  const contactEmail = settings?.contactEmail?.trim() || 'hello@sulochanafurniture.com';
+  const contactEmail = settings?.contactEmail?.trim() || 'sulochafurniture.superstore@gmail.com';
 
   return (
     <header className="sticky top-0 z-[60] border-b border-stone-200/70 bg-white/95 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur">

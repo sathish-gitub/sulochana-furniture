@@ -11,8 +11,8 @@ type FadeInSectionProps = {
 
 export default function FadeInSection({ children, className }: FadeInSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  // amount:0.1 — trigger once at least 10% is visible
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  // amount:0 + margin expansion — fires as soon as any pixel enters the viewport, reliable on short mobile screens
+  const isInView = useInView(ref, { once: true, amount: 0, margin: "0px 0px -5% 0px" });
   const controls = useAnimation();
 
   useEffect(() => {

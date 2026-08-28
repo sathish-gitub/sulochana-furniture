@@ -4,6 +4,7 @@ import FadeInSection from '@/components/FadeInSection';
 import { FacebookIcon, InstagramIcon, YoutubeIcon } from '@/components/BrandIcons';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/SectionHeading';
+import ContactForm from '@/components/ContactForm';
 import { prisma, safePrismaQuery } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -16,7 +17,7 @@ export default async function ContactPage() {
   const settings = await safePrismaQuery(() => prisma.siteSetting.findUnique({ where: { id: 'singleton' } }), null);
   const address = settings?.address?.trim() || '1A2, Udumalai Road, Chinnampalayam, Pollachi';
   const contactPhone = settings?.contactPhone?.trim() || '+91 75503 50009';
-  const contactEmail = settings?.contactEmail?.trim() || 'hello@sulochanafurniture.com';
+  const contactEmail = settings?.contactEmail?.trim() || 'sulochafurniture.superstore@gmail.com';
   const mapUrl = settings?.mapEmbedUrl?.trim() || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62736.145047295286!2d76.99011189213536!3d10.656403139824079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba837b4b87bae69%3A0xc458ac7e19f5f4a0!2sSulochana%20Furniture!5e0!3m2!1sen!2sus!4v1787731444451!5m2!1sen!2sus';
   const isEmbeddableMapUrl = /(google\.com\/maps\/embed|maps\.google\.com\/maps\?|openstreetmap\.org\/export\/embed)/i.test(mapUrl);
 
@@ -34,38 +35,7 @@ export default async function ContactPage() {
               centered={false}
             />
 
-            <form className="mt-8 space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="space-y-2 text-sm font-medium text-stone-700">
-                  <span>First Name</span>
-                  <input type="text" placeholder="John" className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm text-stone-800 outline-none transition focus:border-brand" />
-                </label>
-                <label className="space-y-2 text-sm font-medium text-stone-700">
-                  <span>Last Name</span>
-                  <input type="text" placeholder="Doe" className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm text-stone-800 outline-none transition focus:border-brand" />
-                </label>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="space-y-2 text-sm font-medium text-stone-700">
-                  <span>Email</span>
-                  <input type="email" placeholder="john@example.com" className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm text-stone-800 outline-none transition focus:border-brand" />
-                </label>
-                <label className="space-y-2 text-sm font-medium text-stone-700">
-                  <span>Phone</span>
-                  <input type="tel" placeholder="+91" className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm text-stone-800 outline-none transition focus:border-brand" />
-                </label>
-              </div>
-
-              <label className="space-y-2 text-sm font-medium text-stone-700">
-                <span>Message</span>
-                <textarea rows={5} placeholder="Tell us what furniture you are looking for..." className="w-full resize-y rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm text-stone-800 outline-none transition focus:border-brand" />
-              </label>
-
-              <button type="submit" className="inline-flex items-center rounded-full bg-brandBg px-6 py-3 text-sm font-semibold text-white transition hover:bg-brandBg/90">
-                Send Message
-              </button>
-            </form>
+            <ContactForm />
           </section>
 
           <aside className="rounded-[1.75rem] border border-brand/20 bg-brandBg/5 p-6 shadow-sm lg:p-8">
