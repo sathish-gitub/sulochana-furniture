@@ -10,6 +10,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
   const prevPathname = useRef(pathname);
   // Track whether the initial mount is done so we never show loader on first load
   const mounted = useRef(false);
+  const isAdminRoute = pathname?.startsWith('/admin') ?? false;
 
   useEffect(() => {
     if (!mounted.current) {
@@ -27,7 +28,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
 
   return (
     <>
-      {loading && <PageLoader />}
+      {loading && !isAdminRoute && <PageLoader />}
       {children}
     </>
   );
