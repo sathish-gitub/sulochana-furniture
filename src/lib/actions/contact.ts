@@ -1,11 +1,12 @@
 'use server';
 
 import { Resend } from 'resend';
+import { prisma, safePrismaQuery } from '@/lib/prisma';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM = 'enquiries@sulochanafurniture.in';
-const TO = 'sulochanafurniture.superstore@gmail.com';
+const FALLBACK_TO = 'sulochanafurniture.superstore@gmail.com';
 
 export type ContactFormState =
   | { status: 'idle' }
@@ -26,10 +27,17 @@ export async function sendContactEmail(
     return { status: 'error', message: 'Please fill in all required fields.' };
   }
 
+  // Resend only delivers to arbitrary recipients once the sending domain is verified.
+  const settings = await safePrismaQuery(
+    () => prisma.siteSetting.findUnique({ where: { id: 'singleton' } }),
+    null
+  );
+  const to = settings?.contactEmail?.trim() || FALLBACK_TO;
+
   try {
     const { error } = await resend.emails.send({
       from: FROM,
-      to: TO,
+      to,
       subject: 'New enquiry from sulochanafurniture.in',
       text: [
         `Name:    ${firstName} ${lastName}`,

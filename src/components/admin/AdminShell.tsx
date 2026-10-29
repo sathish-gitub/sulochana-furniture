@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { href: '/admin/products', label: 'Products' },
   { href: '/admin/banners', label: 'Banners' },
   { href: '/admin/testimonials', label: 'Testimonials' },
+  { href: '/admin/careers', label: 'Careers' },
   { href: '/admin/settings', label: 'Site Settings' },
 ];
 

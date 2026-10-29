@@ -138,7 +138,7 @@ export default function HomePageClient({ banners, categories, settings, testimon
           <div className="grid gap-10 rounded-[2rem] border border-stone-200 bg-white p-8 shadow-sm lg:grid-cols-[0.95fr_1.05fr] lg:p-12">
             <div className="relative overflow-hidden rounded-[1.5rem] bg-stone-100 p-3">
               <div className="relative aspect-[1217/1292] h-full w-full">
-                <Image src="/images/store_photo.png" alt={settings.storyTitle} fill className="rounded-[1.25rem] object-cover" unoptimized />
+                <Image src={settings.storyImage || '/images/store_photo.png'} alt={settings.storyTitle} fill className="rounded-[1.25rem] object-cover" unoptimized />
               </div>
             </div>
             <div className="flex flex-col justify-center">
