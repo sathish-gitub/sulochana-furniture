@@ -12,7 +12,7 @@ type CategoryRow = {
   order: number;
   parentId: string | null;
   _count: { products: number };
-  children: CategoryRow[];
+  children?: CategoryRow[];
 };
 
 export default async function CategoriesPage({
@@ -77,7 +77,7 @@ function CategoryRows({ category }: { category: CategoryRow }) {
   return (
     <>
       <CategoryTableRow category={category} indent={false} />
-      {category.children.map((child) => (
+      {(category.children ?? []).map((child) => (
         <CategoryTableRow key={child.id} category={child} indent />
       ))}
     </>
