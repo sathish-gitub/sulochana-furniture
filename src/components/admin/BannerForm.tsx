@@ -54,10 +54,8 @@ export default function BannerForm({ mode, action, initialValues }: BannerFormPr
           initialUrl={initialValues?.image ?? null}
           label="Image"
           onUploadingChange={setUploading}
+          hint="Recommended 1350 x 450 px (3:1), JPG or WebP, max 1 MB"
         />
-        <p className="mt-1 text-xs text-stone-500">
-          Recommended 1350 x 450 px (3:1), JPG or WebP, under 4 MB
-        </p>
       </div>
 
       <div>

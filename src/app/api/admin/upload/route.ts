@@ -2,9 +2,9 @@ import { put } from '@vercel/blob';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdmin } from '@/lib/admin-auth';
 import { slugify } from '@/lib/slug';
+import { MAX_UPLOAD_BYTES } from '@/lib/upload-limits';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-const MAX_SIZE_BYTES = 4 * 1024 * 1024; // 4 MB
 
 export async function POST(request: NextRequest) {
   const isAdmin = await getAdmin();
@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Only JPEG, PNG or WEBP images are allowed' }, { status: 400 });
   }
 
-  if (file.size > MAX_SIZE_BYTES) {
-    return NextResponse.json({ error: 'Image must be 4 MB or smaller' }, { status: 400 });
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return NextResponse.json({ error: 'Image must be 1 MB or smaller' }, { status: 400 });
   }
 
   const extensionMatch = file.name.match(/\.([a-zA-Z0-9]+)$/);

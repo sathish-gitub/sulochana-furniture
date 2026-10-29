@@ -150,7 +150,12 @@ export default function CategoryForm({ mode, action, parentOptions, initialValue
         />
       </div>
 
-      <ImageUploader name="image" initialUrl={initialValues?.image ?? null} label="Image" />
+      <ImageUploader 
+        name="image" 
+        initialUrl={initialValues?.image ?? null} 
+        label="Image" 
+        hint="Recommended 500 x 500 px (1:1 square), JPG or WebP, max 1 MB"
+      />
 
       <SubmitButton />
     </form>

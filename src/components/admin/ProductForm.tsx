@@ -251,6 +251,7 @@ export default function ProductForm({ mode, action, categoryOptions, initialValu
             initialUrl={initialValues?.images?.[index] ?? null}
             label={label}
             onUploadingChange={(uploading) => handleSlotUploadingChange(index, uploading)}
+            hint="Recommended 500 x 500 px (1:1 square), JPG or WebP, max 1 MB"
           />
         ))}
       </div>

@@ -1,17 +1,17 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { MAX_UPLOAD_BYTES } from '@/lib/upload-limits';
 
 type ImageUploaderProps = {
   name: string;
   initialUrl: string | null;
   label: string;
   onUploadingChange?: (uploading: boolean) => void;
+  hint?: string;
 };
 
-const MAX_SIZE_BYTES = 4 * 1024 * 1024; // 4 MB
-
-export default function ImageUploader({ name, initialUrl, label, onUploadingChange }: ImageUploaderProps) {
+export default function ImageUploader({ name, initialUrl, label, onUploadingChange, hint }: ImageUploaderProps) {
   const [url, setUrl] = useState<string | null>(initialUrl);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,8 +25,8 @@ export default function ImageUploader({ name, initialUrl, label, onUploadingChan
 
     setError(null);
 
-    if (file.size > MAX_SIZE_BYTES) {
-      setError('Image must be 4 MB or smaller');
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setError('Image must be 1 MB or smaller');
       event.target.value = '';
       return;
     }
@@ -90,6 +90,8 @@ export default function ImageUploader({ name, initialUrl, label, onUploadingChan
             onChange={handleFileChange}
             className="text-sm text-stone-600"
           />
+
+          {hint ? <p className="text-xs text-stone-500">{hint}</p> : null}
 
           <button
             type="button"
