@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type BannerItem = {
   id: string;
@@ -45,18 +46,33 @@ export default function HomeBannerSlider({ banners }: HomeBannerSliderProps) {
           <div className="flex w-full transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
             {banners.map((banner, index) => {
               const dims = bannerDimensions[banner.image as keyof typeof bannerDimensions] ?? { width: 1350, height: 450 };
+              const alt = banner.title?.trim() || 'Sulochana Furniture banner';
+
+              const image = (
+                <Image
+                  src={banner.image}
+                  alt={alt}
+                  width={dims.width}
+                  height={dims.height}
+                  className="w-full h-auto"
+                  unoptimized
+                  priority={index === 0}
+                />
+              );
 
               return (
                 <div key={banner.id} className="relative min-w-full">
-                  <Image
-                    src={banner.image}
-                    alt={banner.title ?? `Featured banner ${index + 1}`}
-                    width={dims.width}
-                    height={dims.height}
-                    className="h-auto w-full"
-                    unoptimized
-                    priority={index === 0}
-                  />
+                  {banner.ctaUrl ? (
+                    banner.ctaUrl.startsWith('/') ? (
+                      <Link href={banner.ctaUrl}>{image}</Link>
+                    ) : (
+                      <a href={banner.ctaUrl} rel="noopener noreferrer">
+                        {image}
+                      </a>
+                    )
+                  ) : (
+                    image
+                  )}
                 </div>
               );
             })}
