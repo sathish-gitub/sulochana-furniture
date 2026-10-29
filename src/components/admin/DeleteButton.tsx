@@ -5,6 +5,7 @@ import { useFormStatus } from 'react-dom';
 type DeleteButtonProps = {
   action: (formData: FormData) => Promise<void>;
   id: string;
+  confirmMessage?: string;
 };
 
 function SubmitButton() {
@@ -21,12 +22,12 @@ function SubmitButton() {
   );
 }
 
-export default function DeleteButton({ action, id }: DeleteButtonProps) {
+export default function DeleteButton({ action, id, confirmMessage = 'Delete this category?' }: DeleteButtonProps) {
   return (
     <form
       action={action}
       onSubmit={(event) => {
-        if (!window.confirm('Delete this category?')) {
+        if (!window.confirm(confirmMessage)) {
           event.preventDefault();
         }
       }}

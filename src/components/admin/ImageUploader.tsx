@@ -6,11 +6,12 @@ type ImageUploaderProps = {
   name: string;
   initialUrl: string | null;
   label: string;
+  onUploadingChange?: (uploading: boolean) => void;
 };
 
 const MAX_SIZE_BYTES = 4 * 1024 * 1024; // 4 MB
 
-export default function ImageUploader({ name, initialUrl, label }: ImageUploaderProps) {
+export default function ImageUploader({ name, initialUrl, label, onUploadingChange }: ImageUploaderProps) {
   const [url, setUrl] = useState<string | null>(initialUrl);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,6 +32,7 @@ export default function ImageUploader({ name, initialUrl, label }: ImageUploader
     }
 
     setUploading(true);
+    onUploadingChange?.(true);
 
     try {
       const formData = new FormData();
@@ -52,6 +54,7 @@ export default function ImageUploader({ name, initialUrl, label }: ImageUploader
       setError('Upload failed');
     } finally {
       setUploading(false);
+      onUploadingChange?.(false);
       event.target.value = '';
     }
   }

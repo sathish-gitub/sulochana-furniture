@@ -22,12 +22,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     () =>
       prisma.product.findUnique({
         where: { slug: params.slug },
-        select: { name: true },
+        select: { name: true, status: true },
       }),
     null
   );
 
-  if (!product) {
+  if (!product || product.status === 'DRAFT') {
     return {
       title: 'Product Not Found | Sulochana Furniture',
     };
@@ -73,7 +73,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     safePrismaQuery(() => prisma.siteSetting.findUnique({ where: { id: 'singleton' } }), null),
   ]);
 
-  if (!product) {
+  if (!product || product.status === 'DRAFT') {
     notFound();
   }
 
@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         where: {
           categoryId: product.category.id,
           id: { not: product.id },
-          status: 'ACTIVE',
+          status: { not: 'DRAFT' },
         },
         include: {
           images: { select: { url: true }, orderBy: { order: 'asc' } },

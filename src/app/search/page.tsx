@@ -27,7 +27,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     try {
       products = await prisma.product.findMany({
         where: {
-          status: 'ACTIVE',
+          status: { not: 'DRAFT' },
           OR: [
             { name: { contains: query, mode: 'insensitive' } },
             { category: { name: { contains: query, mode: 'insensitive' } } },

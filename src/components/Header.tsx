@@ -16,18 +16,18 @@ export default async function Header() {
           where: {
             parentId: null,
             OR: [
-              { products: { some: {} } },
+              { products: { some: { status: { not: 'DRAFT' } } } },
               { children: { some: {} } },
             ],
           },
           include: {
             children: {
-              where: { products: { some: {} } },
+              where: { products: { some: { status: { not: 'DRAFT' } } } },
               select: { id: true, name: true, slug: true },
               orderBy: { order: 'asc' },
             },
             products: {
-              where: { status: 'ACTIVE' },
+              where: { status: { not: 'DRAFT' } },
               select: { id: true, name: true, slug: true },
               orderBy: { name: 'asc' },
             },

@@ -12,7 +12,7 @@ export default async function HomePage() {
         prisma.category.findMany({
           where: { parentId: null },
           orderBy: { order: 'asc' },
-          include: { _count: { select: { products: true } } },
+          include: { _count: { select: { products: { where: { status: { not: 'DRAFT' } } } } } },
         }),
       []
     ),
@@ -29,7 +29,7 @@ export default async function HomePage() {
     safePrismaQuery(
       () =>
         prisma.product.findMany({
-          where: { status: 'ACTIVE' },
+          where: { status: { not: 'DRAFT' } },
           select: { categoryId: true },
         }),
       []
@@ -91,7 +91,7 @@ export default async function HomePage() {
     ? await safePrismaQuery(
         () =>
           prisma.product.findMany({
-            where: { categoryId: { in: featuredCategoryIds }, status: 'ACTIVE' },
+            where: { categoryId: { in: featuredCategoryIds }, status: { not: 'DRAFT' } },
             orderBy: { createdAt: 'desc' },
             take: 12,
             include: { images: { orderBy: { order: 'asc' } } },
@@ -104,7 +104,7 @@ export default async function HomePage() {
     ? await safePrismaQuery(
         () =>
           prisma.product.findMany({
-            where: { categoryId: { in: getCategoryTreeIds(secondaryCategory.id) }, status: 'ACTIVE' },
+            where: { categoryId: { in: getCategoryTreeIds(secondaryCategory.id) }, status: { not: 'DRAFT' } },
             orderBy: { createdAt: 'desc' },
             take: 12,
             include: { images: { orderBy: { order: 'asc' } } },
@@ -116,7 +116,7 @@ export default async function HomePage() {
   const comboProducts = await safePrismaQuery(
     () =>
       prisma.product.findMany({
-        where: { status: 'ACTIVE' },
+        where: { status: { not: 'DRAFT' } },
         orderBy: { createdAt: 'desc' },
         take: 6,
         include: { images: { orderBy: { order: 'asc' } } },
